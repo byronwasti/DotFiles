@@ -15,6 +15,9 @@ super + Return
 super + w
     chromium
 
+super + s
+    spotify
+
 # Take screenshot
 F4
     /home/byron/Documents/Screenshots/.screenshot.sh
@@ -68,3 +71,7 @@ super + r
     amixer set Master 500{-,+} unmute 
 F8
     amixer set Master toggle 
+
+# Shutdown
+super + F11
+    sudo shutdown now

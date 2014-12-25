@@ -12,9 +12,9 @@ bspc config focus_by_distance   true
 bspc monitor -d I II III
 bspc config top_padding $PANEL_HEIGHT+8
 
-bspc rule -a Gimp desktop=^8 follow=on floating=on
+bspc rule -a Gimp desktop=^3 follow=on floating=on
 #bspc rule -a Chromium desktop=^2 follow=on
 bspc rule -a mplayer floating=on
-bspc rule -a Spotify pseudo_tiled=on
+bspc rule -a Spotify floating=on
 bspc rule -a feh floating=on manage=off
 
