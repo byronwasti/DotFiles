@@ -1,7 +1,7 @@
 #! /bin/sh
 
 bspc config border_width        2
-bspc config window_gap          8
+bspc config window_gap          0
 bspc config focus_follows_pointer true
 
 bspc config split_ratio         0.52
@@ -13,7 +13,7 @@ bspc monitor -d I II III
 bspc config top_padding $PANEL_HEIGHT+8
 
 bspc rule -a Gimp desktop=^3 follow=on floating=on
-#bspc rule -a Chromium desktop=^2 follow=on
+#bspc rule -a Chromium private=on
 bspc rule -a mplayer floating=on
 bspc rule -a Spotify floating=on
 bspc rule -a feh floating=on manage=off
