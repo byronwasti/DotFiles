@@ -5,4 +5,7 @@ xrdb -load ~/.Xresources &
 xset -b &
 sxhkd &
 feh --bg-scale ~/.config/wallpaper/ArchLines.png &
-exec bspwm -c ~/.config/bspwm/bspwmrc
+/home/byron/.config/bspwm/panel/panel &
+
+#exec bspwm -c ~/.config/bspwm/bspwmrc
+exec bspwm

@@ -10,7 +10,7 @@ bspc config gapless_monocle     true
 bspc config focus_by_distance   true
 
 bspc monitor -d I II III IV V VI VII VIII IX X
-bspc config top_padding 14
+bspc config top_padding $PANEL_HEIGHT+8
 
 bspc rule -a Gimp desktop=^8 follow=on floating=on
 #bspc rule -a Chromium desktop=^2 follow=on
@@ -18,4 +18,3 @@ bspc rule -a mplayer floating=on
 bspc rule -a Spotify pseudo_tiled=on
 bspc rule -a feh floating=on manage=off
 
-panel/panel &
