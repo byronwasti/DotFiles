@@ -18,4 +18,4 @@ bspc rule -a mplayer floating=on
 bspc rule -a Spotify pseudo_tiled=on
 bspc rule -a feh floating=on manage=off
 
-./home/byron/.config/bspwm/panel/panel &
+panel/panel &
