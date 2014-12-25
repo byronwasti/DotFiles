@@ -1,2 +1,14 @@
 chromium
 *.swap
+.Xresources
+.bash_history
+.bash_logout
+.bash_profile
+.cache
+.dbus
+.gitconfig
+.gnupg
+.pki
+.vim
+.viminfo
+Documents
