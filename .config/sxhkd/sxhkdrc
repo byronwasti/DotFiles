@@ -60,6 +60,11 @@ super + r
     pkill -USR1 -x sxhkd && xrdb -load ~/.Xresources
 
 # Brightness control
-{XF86MonBrightnessUp, XF86MonBrightnessDown}
-    xbacklight -{inc,dec} 10
+{F7, F6}
+    xbacklight -{inc,dec} 2.5
 
+# Volume control
+{F9, F10}
+    amixer set Master 500{-,+} unmute 
+F8
+    amixer set Master toggle 
