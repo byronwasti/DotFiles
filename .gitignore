@@ -1,5 +1,5 @@
 chromium
-*.swap
+*.swp
 .Xauthority
 .bash_history
 .bash_logout
