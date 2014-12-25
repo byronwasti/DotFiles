@@ -1,0 +1,62 @@
+~button1
+    bspc pointer -g focus
+
+# Giving resizing control
+super + button{1-3}
+    bspc pointer -g {move,resize_side,resize_corner}
+super + !button{1-3}
+    bspc pointer -t %i %i
+
+# Opening applications with key presses
+super + Return
+    urxvt
+
+super + w
+    chromium && bspc desktop -f ^2
+
+
+
+### Setting up actual tiling management ###
+super + space
+    bspc window -t floating
+
+super + {h,j,k,l}
+    bspc window -f {left,down,up,right}
+
+super + a
+    bspc monitor -a 2
+
+# Balance the area of current desktop
+super + b
+    bspc desktop -B
+
+# Switch to different desktops easily
+super + {1,2,3,4,5,6,7,8,9,0}
+    bspc desktop -f ^{1,2,3,4,5,6,7,8,9,10}
+
+# Setup fullscreen mode
+super + f
+    bspc window -t fullscreen
+
+### END OF TILING MANAGEMENT ###
+
+
+# Show Desktop & Bar
+super + d
+    bspc control --toggle-visibility
+
+# Handling exits of windows and exit of bspwm
+super + q
+    bspc window -c
+
+super + shift + q
+    bspc quit
+
+# Reloading settings command
+super + r
+    pkill -USR1 -x sxhkd && xrdb -load ~/.Xresources
+
+# Brightness control
+{XF86MonBrightnessUp, XF86MonBrightnessDown}
+    xbacklight -{inc,dec} 10
+

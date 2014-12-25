@@ -1,0 +1,21 @@
+#! /bin/sh
+
+bspc config border_width        2
+bspc config window_gap          8
+bspc config focus_follows_pointer true
+
+bspc config split_ratio         0.52
+bspc config borderless_monocle  true
+bspc config gapless_monocle     true
+bspc config focus_by_distance   true
+
+bspc monitor -d I II III IV V VI VII VIII IX X
+bspc config top_padding 14
+
+bspc rule -a Gimp desktop=^8 follow=on floating=on
+#bspc rule -a Chromium desktop=^2 follow=on
+bspc rule -a mplayer floating=on
+bspc rule -a Spotify pseudo_tiled=on
+bspc rule -a feh floating=on manage=off
+
+./home/byron/.config/bspwm/panel/panel &
