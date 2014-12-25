@@ -5,6 +5,11 @@
 . /home/byron/.config/bspwm/panel/panel_colors
 
 num_mon=$(bspc query -M | wc -l)
+Battery(){
+    BATPERC=$(acpi --battery | awk -F, '{print $2}')
+    BATPERC="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${BATPERC} %{B-}%{F-}"
+    echo "$BATPERC"
+}
 
 while read -r line ; do
 	case $line in
@@ -70,5 +75,5 @@ while read -r line ; do
 			done
 			;;
 	esac
-	printf "%s\n" "%{l}${wm_infos}%{c}${title}%{r}${sys_infos}"
+	printf "%s\n" "%{l}${wm_infos}%{c}${title}%{r}$(Battery)${sys_infos}"
 done

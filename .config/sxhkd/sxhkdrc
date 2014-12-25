@@ -12,7 +12,7 @@ super + Return
     urxvt
 
 super + w
-    chromium && bspc desktop -f ^2
+    chromium
 
 
 
