@@ -1,3 +1,4 @@
+# Clicking on window puts it in focus
 ~button1
     bspc pointer -g focus
 
@@ -14,9 +15,11 @@ super + Return
 super + w
     chromium
 
+# Take screenshot
+F4
+    /home/byron/Documents/Screenshots/.screenshot.sh
 
-
-### Setting up actual tiling management ###
+# Tiling window management
 super + space
     bspc window -t floating
 
@@ -40,9 +43,6 @@ super + {1,2,3,4,5,6,7,8,9,0}
 # Setup fullscreen mode
 super + f
     bspc window -t fullscreen
-
-### END OF TILING MANAGEMENT ###
-
 
 # Show Desktop & Bar
 super + d

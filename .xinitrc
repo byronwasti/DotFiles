@@ -1,4 +1,4 @@
-# /usr/bin/start-pulseaudio-x11 &
+/usr/bin/start-pulseaudio-x11 &
 sysctl kernel.sysrq=1 &
 # xbindkeys &
 xrdb -load ~/.Xresources &
