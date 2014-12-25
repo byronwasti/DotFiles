@@ -1,6 +1,6 @@
 chromium
 *.swap
-.Xresources
+.Xauthority
 .bash_history
 .bash_logout
 .bash_profile
@@ -13,3 +13,4 @@ chromium
 .viminfo
 pulse
 Documents
+Downloads
