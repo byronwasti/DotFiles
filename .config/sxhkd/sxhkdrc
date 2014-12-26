@@ -1,12 +1,16 @@
-# Clicking on window puts it in focus
-~button1
-    bspc pointer -g focus
+# Take screenshot
+F4
+    /home/byron/Documents/Screenshots/.screenshot.sh
 
-# Giving resizing control
-super + button{1-3}
-    bspc pointer -g {move,resize_side,resize_corner}
-super + !button{1-3}
-    bspc pointer -t %i %i
+# Brightness control
+{F7, F6}
+    xbacklight -{inc,dec} 2.5
+
+# Volume control
+{F9, F10}
+    amixer set Master 500{-,+} unmute 
+F8
+    amixer set Master toggle 
 
 # Opening applications with key presses
 super + Return
@@ -18,12 +22,26 @@ super + w
 super + s
     spotify
 
-# Take screenshot
-F4
-    /home/byron/Documents/Screenshots/.screenshot.sh
+super + m
+    dmenu_run -b -i
+
+#----------------------------------------------------------#
+#                BSPWM SPECIFIC                            #
+#----------------------------------------------------------#
+
+# Clicking on window puts it in focus
+~button1
+    bspc pointer -g focus
+
+# Giving resizing control
+super + button{1-3}
+    bspc pointer -g {move,resize_side,resize_corner}
 
 # Tiling window management
-super + m
+super + !button{1-3}
+    bspc pointer -t %i %i
+
+super + n
     bspc window -t floating
 
 super + {_,shift} + space
@@ -64,17 +82,3 @@ super + shift + q
 # Reloading settings command
 super + r
     pkill -USR1 -x sxhkd && xrdb -load ~/.Xresources
-
-# Brightness control
-{F7, F6}
-    xbacklight -{inc,dec} 2.5
-
-# Volume control
-{F9, F10}
-    amixer set Master 500{-,+} unmute 
-F8
-    amixer set Master toggle 
-
-# Shutdown
-super + F11
-    sudo shutdown now
