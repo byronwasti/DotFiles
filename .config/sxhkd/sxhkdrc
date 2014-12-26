@@ -17,7 +17,7 @@ super + Return
     urxvt
 
 super + w
-    firefox
+    chromebook
 
 super + s
     spotify
@@ -84,4 +84,4 @@ super + shift + q
 
 # Reloading settings command
 super + r
-    pkill -USR1 -x sxhkd && xrdb -load ~/.Xresources
+    pkill -USR1 -x sxhkd && xrdb -load ~/.Xresources && ~/.config/bspwm/bspwmrc && ~/.config/bspwm/panel/panel_bar
