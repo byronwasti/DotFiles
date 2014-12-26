@@ -9,12 +9,13 @@ bspc config borderless_monocle  true
 bspc config gapless_monocle     true
 bspc config focus_by_distance   true
 
-bspc monitor -d I II III
+bspc monitor -d I II III IV V
 bspc config top_padding $PANEL_HEIGHT+8
 
 bspc rule -a Gimp desktop=^3 follow=on floating=on
 #bspc rule -a Chromium private=on
 bspc rule -a mplayer floating=on
-bspc rule -a Spotify floating=on
+#bspc rule -a Spotify floating=on
 bspc rule -a feh floating=on manage=off
+bspc rule -a menu floating=on manage=off
 

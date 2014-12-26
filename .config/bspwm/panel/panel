@@ -17,7 +17,7 @@ clock -sf 'S%a %H:%M' > "$PANEL_FIFO" &
 
 . /home/byron/.config/bspwm/panel/panel_colors
 
-#cat "$PANEL_FIFO" | panel_bar | bar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
+cat "$PANEL_FIFO" | panel_bar | bar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
 
-cat "$PANEL_FIFO" | /home/byron/.config/bspwm/panel/panel_bar | bar -g x$PANEL_HEIGHT -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
+#cat "$PANEL_FIFO" | /home/byron/.config/bspwm/panel/panel_bar | bar -g x$PANEL_HEIGHT -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
 wait

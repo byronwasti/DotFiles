@@ -7,28 +7,34 @@
 num_mon=$(bspc query -M | wc -l)
 Battery(){
     BATPERC=$(acpi --battery | awk -F, '{print $2}')
-    BATPERC="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${BATPERC} %{B-}%{F-}"
+    BATPERC="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${BATPERC}%%  %{B-}%{F-}"
     echo "$BATPERC"
 }
 
 Volume(){
-        volStatus=$(amixer get Master | tail -n 1 | cut -d '[' -f 3 | sed 's/].*//g')
-        volLevel=$(amixer get Master | tail -n 1 | cut -d '[' -f 2 | sed 's/%.*//g')
-        # is alsa muted or not muted?
-        if [ "$volStatus" == "on" ]
-        then
-                echo "%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} $volLevel %{B-}%{F-}"
-        else
-                # If it is muted, make the font red
-                echo "%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} %{B-}%{F-}"
-        fi
+    volStatus=$(amixer get Master | tail -n 1 | cut -d '[' -f 3 | sed 's/].*//g')
+    volLevel=$(amixer get Master | tail -n 1 | cut -d '[' -f 2 | sed 's/%.*//g')
+    # is alsa muted or not muted?
+    if [ "$volStatus" == "on" ]
+    then
+        echo "%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG}  $volLevel  %{B-}%{F-}"
+    else
+        # If it is muted, make the font red
+        echo "%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} %{B-}%{F-}"
+    fi
+}
+
+SpaceRemaining(){
+    SpaceRemain=$(df -h | head -n 2 | tail -n 1 | cut -d 'G' -f 3)
+    echo "%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} $SpaceRemain GB  %{B-}%{F-}"
 }
 
 while read -r line ; do
 	case $line in
 		S*)
 			# clock output
-			sys_infos="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?} %{B-}%{F-}"
+			#sys_infos="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?} %{B-}%{F-}"
+			sys_infos="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} $(date +%a\ %I:%M\ %m/%d/%Y) %{B-}%{F-}"
 			;;
 		T*)
 			# xtitle output
@@ -79,14 +85,14 @@ while read -r line ; do
 						# urgent desktop
 						wm_infos="${wm_infos}%{F$COLOR_URGENT_FG}%{B$COLOR_URGENT_BG} ${name} %{B-}%{F-}"
 						;;
-					L*)
+					#L*)
 						# layout
-						wm_infos="$wm_infos  %{F$COLOR_LAYOUT_FG}%{B$COLOR_LAYOUT_BG} ${name} %{B-}%{F-}"
-						;;
+						#wm_infos="$wm_infos  %{F$COLOR_LAYOUT_FG}%{B$COLOR_LAYOUT_BG} ${name} %{B-}%{F-}"
+						#;;
 				esac
 				shift
 			done
 			;;
 	esac
-	printf "%s\n" "%{l}${wm_infos}%{c}${title}%{r}$(Volume)$(Battery)%%${sys_infos}"
+	printf "%s\n" "%{l}${wm_infos}%{c}${title}%{r}$(SpaceRemaining)|$(Volume)|$(Battery)|${sys_infos}"
 done
