@@ -7,8 +7,15 @@
 num_mon=$(bspc query -M | wc -l)
 Battery(){
     BATPERC=$(acpi --battery | awk -F, '{print $2}')
-    BATPERC="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${BATPERC}%%  %{B-}%{F-}"
-    echo "$BATPERC"
+    BATCHARGE=$(acpi --battery | awk -F, '{print $1}' | cut -d ':' -f 2)
+    if [ "$BATCHARGE" == " Charging" ]
+    then
+        echo "%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${BATPERC}%%+  %{B-}%{F-}"
+    else
+        echo "%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${BATPERC}%%  %{B-}%{F-}"
+    fi
+    #BATPERC="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${BATPERC}%%  %{B-}%{F-}"
+    #echo "$BATPERC"
 }
 
 Volume(){
@@ -20,7 +27,7 @@ Volume(){
         echo "%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG}  $volLevel  %{B-}%{F-}"
     else
         # If it is muted, make the font red
-        echo "%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} %{B-}%{F-}"
+        echo "%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG}  off  %{B-}%{F-}"
     fi
 }
 
@@ -38,7 +45,9 @@ while read -r line ; do
 			;;
 		T*)
 			# xtitle output
-			title="%{F$COLOR_TITLE_FG}%{B$COLOR_TITLE_BG} ${line#?} %{B-}%{F-}"
+            title=$(xtitle | cut -c 1-30)
+			#title="%{F$COLOR_TITLE_FG}%{B$COLOR_TITLE_BG} ${line#?} %{B-}%{F-}"
+			title="%{F$COLOR_TITLE_FG}%{B$COLOR_TITLE_BG} $title %{B-}%{F-}"
 			;;
 		W*)
 			# bspwm internal state
@@ -85,10 +94,10 @@ while read -r line ; do
 						# urgent desktop
 						wm_infos="${wm_infos}%{F$COLOR_URGENT_FG}%{B$COLOR_URGENT_BG} ${name} %{B-}%{F-}"
 						;;
-					#L*)
+					L*)
 						# layout
-						#wm_infos="$wm_infos  %{F$COLOR_LAYOUT_FG}%{B$COLOR_LAYOUT_BG} ${name} %{B-}%{F-}"
-						#;;
+						wm_infos="$wm_infos  %{F$COLOR_LAYOUT_FG}%{B$COLOR_LAYOUT_BG} ${name} %{B-}%{F-}"
+						;;
 				esac
 				shift
 			done
