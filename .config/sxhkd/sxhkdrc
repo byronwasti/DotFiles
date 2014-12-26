@@ -17,7 +17,7 @@ super + Return
     urxvt
 
 super + w
-    chromebook
+    firefox
 
 super + s
     spotify
