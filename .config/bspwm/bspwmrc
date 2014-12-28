@@ -2,7 +2,7 @@
 
 
 bspc config border_width        2
-bspc config window_gap          0
+bspc config window_gap          $BSPWM_GAP
 bspc config focus_follows_pointer true
 
 bspc config split_ratio         0.52
@@ -11,7 +11,7 @@ bspc config gapless_monocle     true
 bspc config focus_by_distance   true
 
 bspc monitor -d I II III IV V
-bspc config top_padding $PANEL_HEIGHT+8
+bspc config top_padding $PANEL_HEIGHT+$BSPWM_GAP
 
 bspc rule -a Gimp desktop=^3 follow=on floating=on
 #bspc rule -a Chromium private=on
