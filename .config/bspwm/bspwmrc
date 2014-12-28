@@ -10,7 +10,8 @@ bspc config borderless_monocle  true
 bspc config gapless_monocle     true
 bspc config focus_by_distance   true
 
-bspc monitor -d I II III IV V
+#bspc monitor -d I II III IV V
+bspc monitor -d $BSPWM_DESKTOPS
 bspc config top_padding $PANEL_HEIGHT+$BSPWM_GAP
 
 bspc rule -a Gimp desktop=^3 follow=on floating=on
