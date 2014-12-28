@@ -14,16 +14,17 @@ F4
 
 # Volume control
 {F9, F10}
-    amixer set Master 500{-,+} unmute 
+    amixer set Master 500{-,+} unmute | echo "Y`(amixer get Master | tail -n 1 | cut -d '[' -f 2 | sed 's/%.*//g')`" > /tmp/panel-fifo
 F8
-    amixer set Master toggle 
+    amixer set Master mute | echo "Y`(amixer get Master | tail -n 1 | cut -d '[' -f 3 | sed 's/].*//g')`" > /tmp/panel-fifo
+
 
 # Opening applications with key presses
 super + Return
     urxvt
 
 super + w
-    firefox
+    $WEB_BROWSER
 
 super + s
     spotify
