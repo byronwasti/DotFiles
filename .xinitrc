@@ -6,6 +6,7 @@ xset -b &
 sxhkd &
 feh --bg-scale ~/.config/wallpaper/ArchLines.png &
 /home/byron/.config/bspwm/panel/panel &
-
+xss-lock -- xscreensaver-command --lock &
+xscreensaver -no-splash &
 #exec bspwm -c ~/.config/bspwm/bspwmrc
 exec bspwm
