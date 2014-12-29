@@ -18,26 +18,6 @@ Battery(){
     #echo "$BATPERC"
 }
 
-# NO LONGER USED
-Volume(){
-    volStatus=$(amixer get Master | tail -n 1 | cut -d '[' -f 3 | sed 's/].*//g')
-    volLevel=$(amixer get Master | tail -n 1 | cut -d '[' -f 2 | sed 's/%.*//g')
-    # is alsa muted or not muted?
-    if [ "$volStatus" == "on" ]
-    then
-        echo "%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG}  $volLevel  %{B-}%{F-}"
-    else
-        # If it is muted, make the font red
-        echo "%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG}  off  %{B-}%{F-}"
-    fi
-}
-
-# NO LONGER USED
-SpaceRemaining(){
-    SpaceRemain=$(df -h | head -n 2 | tail -n 1 | cut -d 'G' -f 3)
-    echo "%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} $SpaceRemain GB  %{B-}%{F-}"
-}
-
 while read -r line ; do
 	case $line in
 		S*)
