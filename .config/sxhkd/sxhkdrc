@@ -86,7 +86,7 @@ super + f
 
 # Show Desktop & Bar
 super + d
-    bspc control --toggle-visibility
+    bspc control --toggle-visibility | echo "X`df -h | head -n 2 | tail -n 1 | cut -d 'G' -f 3`" > /tmp/panel-fifo
 
 # Handling exits of windows and exit of bspwm
 super + q

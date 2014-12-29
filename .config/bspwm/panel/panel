@@ -14,6 +14,7 @@ bspc config top_padding $PANEL_HEIGHT
 bspc control --subscribe > "$PANEL_FIFO" &
 xtitle -sf 'T%s' > "$PANEL_FIFO" &
 clock -sf 'S%a %H:%M' > "$PANEL_FIFO" &
+echo "X`df -h | head -n 2 | tail -n 1 | cut -d 'G' -f 3`" > /tmp/panel-fifo &
 
 . /home/byron/.config/bspwm/panel/panel_colors
 
