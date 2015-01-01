@@ -1,11 +1,11 @@
 # Control PianoBar
-@F1
+F1
     echo -n 'p' > ~/.config/pianobar/ctl
 F2
     echo -n 'n' > ~/.config/pianobar/ctl
 
 # Take screenshot
-F4 
+F4
     /home/byron/Documents/Screenshots/.screenshot.sh
 
 # Brightness control
