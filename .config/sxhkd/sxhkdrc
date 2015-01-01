@@ -57,6 +57,9 @@ super + !button{1-3}
 super + n
     bspc window -t floating
 
+super + shift + n
+    bspc desktop -t floating
+
 super + {_,shift} + space
     bspc desktop -R {90,270}
 
