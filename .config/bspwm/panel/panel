@@ -15,14 +15,11 @@ mkfifo "$PANEL_FIFO_OUT"
 
 bspc config top_padding $PANEL_HEIGHT
 bspc control --subscribe > "$PANEL_FIFO" &
-xtitle -sf 'T%s' > "$PANEL_FIFO" &
-clock -sf 'S%a %H:%M' > "$PANEL_FIFO" &
+#xtitle -sf 'T%s' > "$PANEL_FIFO" &
+clock -sf 'S%a %m/%d/%Y  %I:%M' > "$PANEL_FIFO" &
 echo "X`df -h | head -n 2 | tail -n 1 | cut -d 'G' -f 3`" > /tmp/panel-fifo &
 click_init &
 
 . /home/byron/.config/bspwm/panel/panel_colors
-
 cat "$PANEL_FIFO" | panel_bar | bar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" > $PANEL_FIFO_OUT &
-
-#cat "$PANEL_FIFO" | /home/byron/.config/bspwm/panel/panel_bar | bar -g x$PANEL_HEIGHT -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
 wait

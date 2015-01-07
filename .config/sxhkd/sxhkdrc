@@ -1,21 +1,21 @@
 # Control PianoBar
-@F1
+super + @F1
     echo -n 'p' > ~/.config/pianobar/ctl
-F2
+super + F2
     echo -n 'n' > ~/.config/pianobar/ctl
 
 # Take screenshot
-F4
+super + F4
     /home/byron/Documents/Screenshots/.screenshot.sh
 
 # Brightness control
-{F7, F6}
+super + {F7, F6}
     xbacklight -{inc,dec} 2.5
 
 # Volume control
-{F9, F10}
+super + {F9, F10}
     amixer set Master 500{-,+} unmute | echo "Y`(amixer get Master | tail -n 1 | cut -d '[' -f 2 | sed 's/%.*//g')`" > /tmp/panel-fifo
-F8
+super + F8
     amixer set Master mute | echo "Y`(amixer get Master | tail -n 1 | cut -d '[' -f 3 | sed 's/].*//g')`" > /tmp/panel-fifo
 
 
