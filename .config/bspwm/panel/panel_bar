@@ -14,8 +14,6 @@ Battery(){
     else
         echo "%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} "${BATPERC}"  %{B-}%{F-}"
     fi
-    #BATPERC="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${BATPERC}%%  %{B-}%{F-}"
-    #echo "$BATPERC"
 }
 
 while read -r line ; do
@@ -25,12 +23,6 @@ while read -r line ; do
 			#sys_infos="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} $(date +%a\ %m/%d/%Y) $(date +%I:%M) %{B-}%{F-}"
 			sys_infos="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?} %{B-}%{F-}"
 			;;
-        # NO LONGER USED
-		#T*)
-			# xtitle output
-			#title="%{F$COLOR_TITLE_FG}%{B$COLOR_TITLE_BG} ${line#?} %{B-}%{F-}"
-            #title="%{A:Dshow:}$title%{A}"
-			#;;
         Z*)
             # pianobar output
             pand_song="%{F$COLOR_FREE_FG}%{B$COLOR_FREE_BG} ${line#?} %{B-}%{F-}"
@@ -90,15 +82,10 @@ while read -r line ; do
 						# urgent desktop
 						wm_infos="${wm_infos}%{F$COLOR_URGENT_FG}%{B$COLOR_URGENT_BG} ${name} %{B-}%{F-}"
 						;;
-					L*)
-						# layout
-						#wm_infos="$wm_infos  %{F$COLOR_LAYOUT_FG}%{B$COLOR_LAYOUT_BG} ${name} %{B-}%{F-}"
-						;;
 				esac
 				shift
 			done
 			;;
 	esac
-	printf "%s\n" "%{l} Volume:${volume}  ${space_rem}GB  ${pand_song}%{c}${wm_infos}%{r}$(Battery) ${sys_infos}"
-	#printf "%s\n" "%{l} Volume:${volume}  ${space_rem}GB  ${pand_song}%{c}${LINE_COLORS}%{r}$(Battery) ${sys_infos}"
+	printf "%s\n" "%{l} Volume:${volume} ${space_rem}GB  ${pand_song}%{c}${wm_infos}%{r}$(Battery) ${sys_infos}"
 done
