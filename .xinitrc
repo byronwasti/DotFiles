@@ -5,6 +5,7 @@ xrdb -load ~/.Xresources &
 xset -b &
 sxhkd &
 feh --bg-scale ~/.config/wallpaper/ArchLines.png &
+xsetroot -cursor_name left_ptr
 /home/byron/.config/bspwm/panel/panel &
 xss-lock -- xscreensaver-command --lock &
 xscreensaver -no-splash &
