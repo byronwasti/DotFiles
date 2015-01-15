@@ -61,6 +61,7 @@ while read -r line ; do
 					O*)
 						# focused occupied desktop
 						wm_infos="${wm_infos}%{F$COLOR_FOCUSED_OCCUPIED_FG}%{B$COLOR_FOCUSED_OCCUPIED_BG}%{U$COLOR_FOREGROUND}%{+u} ${name} %{-u}%{B-}%{F-}"
+                        wm_infos="%{A:${name}:}${wm_infos}%{A}"
 						;;
 					F*)
 						# focused free desktop
@@ -73,6 +74,7 @@ while read -r line ; do
 					o*)
 						# occupied desktop
 						wm_infos="${wm_infos}%{F$COLOR_OCCUPIED_FG}%{B$COLOR_OCCUPIED_BG} ${name} %{B-}%{F-}"
+                        wm_infos="%{A:D${name}:}${wm_infos}%{A}"
 						;;
 					f*)
 						# free desktop

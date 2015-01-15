@@ -16,6 +16,8 @@ talk() { local words="$*"; echo ${words} | festival --tts &> /dev/null ;  }
 
 alias OlinFiles='sudo mount //fsvs01/public /mnt/public -o user=bwasti,workgroup=olin.edu,uid=byron && sudo mount //fsvs01/sandbox /mnt/sandbox -o user=bwasti,workgroup=olin.edu,uid=byron'
 
+alias nighttime='redshift -l 40.7127:74.0059'
+
 if [ "$TERM" = "linux" ]; then
     echo -en "\e]P0222222" #black
     echo -en "\e]P8222222" #darkgrey

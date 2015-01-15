@@ -20,4 +20,3 @@ bspc rule -a mplayer floating=on
 #bspc rule -a Spotify floating=on
 bspc rule -a feh floating=on manage=off
 bspc rule -a xtut14 floating=on manage=off
-

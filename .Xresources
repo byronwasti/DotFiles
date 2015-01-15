@@ -1,7 +1,7 @@
 URxvt.depth: 32
 URxvt.scrollBar: false
-#URxvt.font: xft:Ubuntu Mono:size=12,style=Regular
 URxvt.font: xft:Source\ Code\ Pro\ Medium:pixelsize=13:antialias=true:hinting=true
+*modifier: alt
 
 *background:#222222
 *foreground:#e8e9ca
