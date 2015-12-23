@@ -1,0 +1,4 @@
+#! /bin/bash
+
+cat "$PANEL_FIFO_OUT" | click_events &
+wait

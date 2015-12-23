@@ -1,0 +1,141 @@
+# Control PianoBar
+@XF86AudioPlay
+    playerctl play-pause
+XF86AudioNext
+    playerctl next
+XF86AudioPrev
+    playerctl previous
+
+# Take screenshot
+super + End
+    /home/byron/Documents/screenshots/.screenshot.sh
+
+# Take a screen recording
+super + F8
+    urxvt -e /home/byron/Documents/screenshots/ScreenRecordings/.record.sh
+
+# Brightness control
+{XF86MonBrightnessUp, XF86MonBrightnessDown}
+    xbacklight -{inc,dec} 10
+
+{XF86MonBrightnessUp, XF86MonBrightnessDown} + shift
+    xbacklight -set {100, 10}
+
+{XF86MonBrightnessUp, XF86MonBrightnessDown} + control
+    xbacklight -{inc,dec} 1
+
+# Volume control
+{XF86AudioLowerVolume, XF86AudioRaiseVolume}
+    amixer -D pulse set Master unmute && amixer set Master 1{-,+} | echo "Y`(amixer get Master | tail -n 1 | cut -d '[' -f 2 | sed 's/%.*//g')`" > /tmp/panel-fifo
+
+XF86AudioMute
+    amixer set Master mute | echo "Y`(amixer get Master | tail -n 1 | cut -d '[' -f 4 | sed 's/].*//g')`" > /tmp/panel-fifo
+
+
+# Opening applications with key presses
+super + Return
+    urxvt
+
+super + a
+    lighthouse
+
+super + w
+    firefox
+
+super + o
+    slock
+
+super + v
+    vivaldi
+
+super + g
+    feh --bg-scale --random ~/.config/wallpaper/*
+
+super + s
+    spotify
+
+super + m
+    dmenu_run -b -i -f
+
+#----------------------------------------------------------#
+#                BSPWM SPECIFIC                            #
+#----------------------------------------------------------#
+
+# Clicking on window puts it in focus
+~button1
+    bspc pointer -g focus
+
+# Giving resizing control
+super + button{1-3}
+    bspc pointer -g {move,resize_side,resize_corner}
+
+# Tiling window management
+super + !button{1-3}
+    bspc pointer -t %i %i
+
+super + n
+    bspc window -t floating
+
+super + shift + n
+    bspc desktop -t floating
+
+super + {_,shift} + space
+    bspc desktop -R {90,270}
+
+super + {h,j,k,l}
+    bspc window -f {left,down,up,right}
+
+super + shift + {1,2,3,4,5,6,7,8,9,0}
+    bspc window -d ^{1,2,3,4,5,6,7,8,9,10}
+
+super + control + {1,2,3,4,5,6,7,8,9,0}
+    bspc monitor -f ^{1,2,3,4,5,6,7,8,9,10}
+
+super + {Left, Down, Up, Right}
+    bspc window -p {left, down, up, right}
+
+super+ shift + {h,j,k,l}
+    bspc window -p {left, down, up, right}
+
+# Balance the area of current desktop
+super + {_,shift} + b
+    bspc desktop -{B,E}
+
+# Switch to different desktops easily
+super + {1,2,3,4,5,6,7,8,9,0}
+    bspc desktop -f ^{1,2,3,4,5,6,7,8,9,10}
+
+super + e
+    bspc desktop -f last
+
+# Setup fullscreen mode
+super + f
+    bspc window -t fullscreen
+
+# Show Desktop & Bar
+super + d
+    echo "X`df -h | grep sda4 | cut -d 'G' -f 3`" > /tmp/panel-fifo; \
+    ~/.config/systemd/user/battery.sh
+    
+
+# Handling exits of windows and exit of bspwm
+super + q
+    bspc window -c
+
+super + shift + q
+    bspc window -k
+
+super + shift + control + q
+    bspc quit
+
+# Resizing the gaps between windows
+super + {minus,equal}
+    for desktop in $(bspc query -D); do bspc config -d $desktop window_gap $(( `bspc config -d $desktop window_gap` {+,-} 10 )); done
+
+# Reloading settings command
+super + r
+    pkill -USR1 -x sxhkd && xrdb -load ~/.Xresources && ~/.config/bspwm/bspwmrc && ~/.config/bspwm/panel/panel_bar
+
+# Resarting the Internet
+super + i
+    OlinInternet

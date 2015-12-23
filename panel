@@ -1,0 +1,38 @@
+#!/bin/bash
+
+if [ $(pgrep -cx panel) -gt 1 ] ; then
+	printf "%s\n" "The panel is already running." >&2
+	exit 1
+fi
+
+. /etc/profile
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+#[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+#mkfifo "$PANEL_FIFO"
+
+#bspc config top_padding $PANEL_HEIGHT+8
+bspc control --subscribe > "$PANEL_FIFO" &
+#xtitle -sf 'T%s' > "$PANEL_FIFO" &
+clock -sf 'S%a %m/%d/%Y  %I:%M' > "$PANEL_FIFO" &
+echo "X`df -h | head -n 2 | tail -n 1 | cut -d 'G' -f 3`" > /tmp/panel-fifo &
+#click_init & # Enable for clicking
+
+. /home/byron/.config/bspwm/panel/panel_colors
+W_GAP=${BSPWM_GAP}
+WIDTH=$(( (1600-${W_GAP}) ))
+X_OFF=$(( (1600-$WIDTH)/2 ))
+Y_OFF=$((${BSPWM_GAP}/2))
+WIDTH=
+X_OFF=0
+Y_OFF=0
+
+#PANEL_FONT_FAMILY=-*-terminus-*-*-*-*-14-*-*-*-*-*-*-*
+#PANEL_FONT_FAMILY=-*-helvetica-*-r-*-*-12-*-*-*-*-*-*-*
+
+
+cat "$PANEL_FIFO" | panel_bar | DISPLAY=:0 lemonbar -g ${WIDTH}x$PANEL_HEIGHT+$X_OFF+$Y_OFF -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" -b -u 4 -p &
+#cat "$PANEL_FIFO" | panel_bar | DISPLAY=:0 lemonbar -g ${WIDTH}x$PANEL_HEIGHT+${X_OFF}+${Y_OFF} -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" -p &
+
+wait
