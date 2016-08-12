@@ -2,9 +2,10 @@
     syntax enable
     "set background=dark
     "colorscheme material-theme
-    colorscheme molokai
+    "colorscheme molokai
     "colorscheme molokai_new
     "colorscheme blackdust
+    colorscheme zenburn
 
 " Basic config
     filetype plugin indent on " Load filetype-specific indent files
@@ -44,6 +45,23 @@
 
     " Quit on jk
     imap jk <Esc>
+    imap Jk <Esc>
+    imap JK <Esc>
+    imap jK <Esc>
+
+    " OSX clipboard sharing
+    "set clipboard=unnamed  "NOT FUNCTIONAL
+    "set clipboard=unnamedplus,unnamed,autoselect
+
+    " Remap to be J and K better
+    nnoremap J 10j
+    nnoremap K 10k
+
+    " Get syntax highlighting on FS files
+    au BufRead,BufNewFile *.fs setfiletype javascript
+
+    " o and O will not insert comments with newlines
+    :set formatoptions-=o
 
 " Tabs and vsp and splits
     nnoremap <C-h> <C-w>h
@@ -94,6 +112,20 @@
     " Hex editor
     nnoremap <leader>h <Esc>Hexmode<CR>
 
+    " Buffer movement
+    nmap <Leader>l :bnext<CR>
+    nmap <leader>h :bprevious<CR>
+    nmap <leader>bl :ls<CR>
+
+    " Refresh buffers
+    nmap <leader>e :checktime<CR>
+
+    " Switch to buffer
+    nnoremap <leader>z :buffers<CR>:buffer<Space>
+
+    " Reload config
+    nnoremap <leader>a <Esc>:source ~/.vimrc<CR>
+
 " Folds
     set foldenable
     set foldlevelstart=10
@@ -102,7 +134,17 @@
     nnoremap <leader>f za
 
 " Plugins
-    runtime bundle/vim-surround/plugin/surround.vim
+    " runtime bundle/vim-surround/plugin/surround.vim
+    set runtimepath^=~/.vim/bundle/ctrlp.vim
+    set runtimepath^=~/.vim/bundle/tagbar
+
+    nnoremap <leader>c :CtrlPTag<cr>
+    nnoremap <leader>. :CtrlP<cr>
+    nnoremap <silent> <Leader>bb :TagbarToggle<CR>
+    nnoremap <silent> <Leader>bj :TagbarOpen j<CR>
+    let g:ctrlp_working_path_mode = 'a'
+    let g:tagbar_width = 60
+
 
 " Functions
     " Switch between number and relative number
