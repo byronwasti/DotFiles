@@ -60,6 +60,9 @@
     " Get syntax highlighting on FS files
     au BufRead,BufNewFile *.fs setfiletype javascript
 
+    " Map handelbars to html
+    au BufRead,BufNewFile *.handlebars set filetype=html
+
     " o and O will not insert comments with newlines
     :set formatoptions-=o
 
@@ -82,6 +85,7 @@
     nmap <silent> <leader>mc <Esc>:w<CR>:!clear;gcc % && ./a.out<CR>
     nmap <silent> <leader>mm <Esc>:w<CR>:!make && ./a.out<CR>
     nmap <silent> <leader>mo <Esc>:w<CR>:!octave --no-gui %<CR>
+    nmap <silent> <leader>mj <Esc>:w<CR>:!node %<CR>
 
 	" Save session
 	nmap <leader>s <Esc>:mksession!<CR>:wqa<CR>
@@ -126,6 +130,12 @@
     " Reload config
     nnoremap <leader>a <Esc>:source ~/.vimrc<CR>
 
+    " Find  <deprecated>
+    "nnoremap <leader>ff :find <C-R>=expand('%:p:h').'/**/*'<CR>
+    "nnoremap <leader>fs :sfind <C-R>=expand('%:p:h').'/**/*'<CR>
+    "nnoremap <leader>fv :vert sfind <C-R>=expand('%:p:h').'/**/*'<CR>
+    "nnoremap <leader>ft :tabfind <C-R>=expand('%:p:h').'/**/*'<CR>
+
 " Folds
     set foldenable
     set foldlevelstart=10
@@ -157,6 +167,29 @@
         endif
     endfunc
 
+    " Make it a lot easier to write text
+    func! WordProcessorMode() 
+        "setlocal formatoptions=1 
+        "setlocal noexpandtab 
+        "map j gj 
+        "map k gk
+        setlocal spell spelllang=en_us 
+        "set complete+=s
+        "set formatprg=par
+        setlocal wrap 
+        setlocal linebreak 
+    endfu 
+    com! WP call WordProcessorMode()
+
+    " Make it easier to make tables
+    func! TabularViewMode()
+        set number
+        setlocal noexpandtab
+        setlocal shiftwidth=20
+        setlocal softtabstop=20
+        setlocal tabstop=20
+    endfu
+    com! TVM call TabularViewMode()
 
     " Set up command to toggle Hex
     command -bar Hexmode call ToggleHex()
