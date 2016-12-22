@@ -54,8 +54,8 @@
     "set clipboard=unnamedplus,unnamed,autoselect
 
     " Remap to be J and K better
-    nnoremap J 10j
-    nnoremap K 10k
+    "nnoremap J 10j
+    "nnoremap K 10k
 
     " Get syntax highlighting on FS files
     au BufRead,BufNewFile *.fs setfiletype javascript
@@ -86,6 +86,7 @@
     nmap <silent> <leader>mm <Esc>:w<CR>:!make && ./a.out<CR>
     nmap <silent> <leader>mo <Esc>:w<CR>:!octave --no-gui %<CR>
     nmap <silent> <leader>mj <Esc>:w<CR>:!node %<CR>
+    nmap <silent> <leader>mh <Esc>:w<CR>:!clear;ghc % -o a.out && ./a.out<CR>
 
 	" Save session
 	nmap <leader>s <Esc>:mksession!<CR>:wqa<CR>
@@ -169,25 +170,46 @@
 
     " Make it a lot easier to write text
     func! WordProcessorMode() 
-        "setlocal formatoptions=1 
-        "setlocal noexpandtab 
-        "map j gj 
-        "map k gk
-        setlocal spell spelllang=en_us 
-        "set complete+=s
-        "set formatprg=par
-        setlocal wrap 
-        setlocal linebreak 
+        if( &spell == 1)
+            setlocal nospell 
+            setlocal nowrap 
+            setlocal nolinebreak 
+        else
+            "setlocal formatoptions=1 
+            "setlocal noexpandtab 
+            "map j gj 
+            "map k gk
+            setlocal spell spelllang=en_us 
+            "set complete+=s
+            "set formatprg=par
+            setlocal wrap 
+            setlocal linebreak 
+        endif
     endfu 
     com! WP call WordProcessorMode()
 
+
+    func! WordProcessorModeOff() 
+        setlocal nospell 
+        setlocal nowrap 
+        setlocal nolinebreak 
+    endfu 
+    com! WPOFF call WordProcessorModeOff()
+
     " Make it easier to make tables
     func! TabularViewMode()
-        set number
-        setlocal noexpandtab
-        setlocal shiftwidth=20
-        setlocal softtabstop=20
-        setlocal tabstop=20
+        if( &expandtab == 1)
+            set number
+            setlocal noexpandtab
+            setlocal shiftwidth=20
+            setlocal softtabstop=20
+            setlocal tabstop=20
+        else
+            set expandtab " tabs are spaces
+            set tabstop=4  " Number of visual spaces per tab
+            set softtabstop=4 " Number of spaces in tab
+            set shiftwidth=4
+        endif
     endfu
     com! TVM call TabularViewMode()
 

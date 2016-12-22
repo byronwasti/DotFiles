@@ -1,26 +1,46 @@
 URxvt.depth:0
 URxvt.scrollBar: false
 URxvt.font: xft:Source\ Code\ Pro\ Medium:pixelsize=13:antialias=true:hinting=true
-#URxvt.perl-ext:
-#URxvt.perl-ext-common:
 
-*background:#222222
-*foreground:#e8e9ca
-
-*color0:    #222222
-*color1:    #8b3e2f
-*color2:    #526f33
-*color3:    #665847
-*color4:    #4a708b
-*color5:    #7a378b
-*color6:    #528b8b
-*color7:    #999999
-
-*color8:    #4c4c4c
-*color9:    #d75f00
-*color10:   #cee318
-*color11:   #eee685
-*color12:   #9ac0cd
-*color13:   #9f79ee
-*color14:   #79cdcd
-*color15:   #e8e9ca
+URxvt*xftAntialias: true
+URxvt*background: #3f3f3f
+URxvt*foreground: #dcdccc
+URxvt*cursorColor: #aaaaaa
+URxvt*colorUL: #366060
+URxvt*underlineColor: #dfaf8f
+URxvt*color0: #3f3f3f
+URxvt*color1: #cc9393
+URxvt*color2: #7f9f7f
+URxvt*color3: #d0bf8f
+URxvt*color4: #6ca0a3
+URxvt*color5: #dc8cc3
+URxvt*color6: #93e0e3
+URxvt*color7: #dcdccc
+URxvt*color8: #000000
+URxvt*color9: #dca3a3
+URxvt*color10: #bfebbf
+URxvt*color11: #f0dfaf
+URxvt*color12: #8cd0d3
+URxvt*color13: #dc8cc3
+URxvt*color14: #93e0e3
+URxvt*color15: #ffffff
+!*background:#222222
+!*foreground:#e8e9ca
+!
+!*color0:    #222222
+!*color1:    #8b3e2f
+!*color2:    #526f33
+!*color3:    #665847
+!*color4:    #4a708b
+!*color5:    #7a378b
+!*color6:    #528b8b
+!*color7:    #999999
+!
+!*color8:    #4c4c4c
+!*color9:    #d75f00
+!*color10:   #cee318
+!*color11:   #eee685
+!*color12:   #9ac0cd
+!*color13:   #9f79ee
+!*color14:   #79cdcd
+!*color15:   #e8e9ca
