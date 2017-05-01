@@ -1,0 +1,35 @@
+Config { position = BottomW L 100 
+        --, font = "-*-Fixed-Bold-R-Normal-*-15-*-*-*-*-*-*-*"
+        , font = "xft:Source\ Code\ Pro\ Medium:pixelsize=15:antialias=true:hinting=true"
+        , borderColor = "black"
+        , border = TopB
+        , bgColor = "#3f3f3f"
+        , fgColor = "#dcdccc"
+        , textOffset = 19
+        , commands = [ Run Date "%a %b %_d %Y %I:%M" "date" 60
+                     , Run Wireless "wlp58s0" ["-t", "Wifi: <essid> <quality>%"] 600
+                     , Run Memory ["-t", "Mem: <usedratio>% (<cache>M)"] 600
+                     --, Run Volume 'default' 'Master' ["-t", "Vol: <volume>"] 10
+                     , Run MultiCpu ["-t", "CPU: <autototal>"] 600
+                     , Run BatteryP ["BAT0"]
+                                    [ "-t", "Batt: <acstatus><watts>W <timeleft> (<left>%)"
+                                    , "-L", "20", "-l", "red"
+                                    , "-H", "65", "-h", "green"
+                                    , "-n", "orange"
+                                    , "--"
+                                    ,  "-O", "<fc=green>+</fc>", "-i", "", "-o", ""
+                                    --, "-L", "3", "-H", "15"
+                                    --, "-l", "red", "-m", "blue", "-h", "green"
+                                    ] 600
+                     , Run Brightness [ "-t", "Light: <percent>%", "--"
+                                      , "-D", "intel_backlight"
+                                      , "-C", "actual_brightness"
+                                      , "-M", "max_brightness"
+                                      ] 60
+                     , Run StdinReader
+                     , Run Com "/home/byron/.xmobar/volume.sh" [] "myVol" 60
+                     ]
+        , sepChar = "%"
+        , alignSep = "}{"
+        , template = " %StdinReader% }{ %myVol% | %multicpu% | %memory% | %wlp58s0wi% | %bright% | %battery% | %date% "
+       }
