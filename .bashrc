@@ -43,3 +43,7 @@ function SLEEP_OFF {
     xset -dpms && xset s off
 }
 
+function WATCH_VIM {
+    while true; do inotifywait -q --event move_self --format '%w' $1; done
+}
+

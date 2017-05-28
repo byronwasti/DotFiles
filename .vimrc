@@ -1,6 +1,3 @@
-set mouse=a
-map <ScrollWheelUp> <C-Y>
-map <ScrollWheelDown> <C-E>
 
 " Colors
     syntax enable
@@ -8,17 +5,7 @@ map <ScrollWheelDown> <C-E>
     "colorscheme molokai
     "colorscheme molokai_new
     "colorscheme blackdust
-    let colorModeEnv=$DAYTIMEMODEENV
-
-    if colorModeEnv == 'light'
-        set background=light
-        "let g:solarized_termcolors=256
-        colorscheme solarized
-    endif
-
-    if colorModeEnv == 'dark'
-        colorscheme zenburn
-    endif
+    colorscheme zenburn
 
 " Basic config
     filetype plugin indent on " Load filetype-specific indent files
@@ -80,6 +67,11 @@ map <ScrollWheelDown> <C-E>
 
     " o and O will not insert comments with newlines
     :set formatoptions-=o
+
+    " Mouse options
+    set mouse=a
+    map <ScrollWheelUp> <C-Y>
+    map <ScrollWheelDown> <C-E>
 
 " Tabs and vsp and splits
     nnoremap <C-h> <C-w>h
