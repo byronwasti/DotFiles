@@ -106,8 +106,6 @@
     " Copy and Paste from + register
     nmap <silent> <leader>p <Esc>:set paste<CR>"+p<CR>:set nopaste<CR>
     nmap <silent> <leader>P <Esc>:set paste<CR>"+P<CR>:set nopaste<CR>
-    vmap <silent> <leader>p <Esc>:set paste<CR>"+p<CR>:set nopaste<CR>
-    vmap <silent> <leader>P <Esc>:set paste<CR>"+P<CR>:set nopaste<CR>
     vmap <leader>y "+y<CR>
 
     " Toggle numbering
@@ -163,6 +161,10 @@
     let g:LanguageClient_serverCommands = {
                 \ 'rust': ['rust-analyzer'],
                 \ }
+
+    let g:LanguageClient_useVirtualText = "No"
+
+    let g:LanguageClient_loggingFile =  expand('~/.local/share/nvim/LanguageClient.log') 
 
     " let g:LanguageClient_diagnosticsEnable=0
     nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
