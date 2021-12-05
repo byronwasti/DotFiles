@@ -1,10 +1,6 @@
-
 " Colors
+    syntax on
     syntax enable
-    "colorscheme material-theme
-    "colorscheme molokai
-    "colorscheme molokai_new
-    "colorscheme blackdust
     colorscheme zenburn
 
 " Basic config
@@ -17,6 +13,7 @@
     set number " Show line numbers
     set showcmd " Show command in bottom bar
     set cursorline " Highlight current line
+    highlight CursorLineNR cterm=None
 
     set wildmenu " Visual autocomplete 
     set wildignore=*.o,*~,*.pyc
@@ -42,6 +39,9 @@
 
     " Center me!
     nnoremap <space> zz
+
+    " Get rid of Ex mode
+    nnoremap Q @q
 
     " Quit on jk
     "imap jk <Esc>
@@ -95,11 +95,6 @@
     nmap <silent> <leader>mj <Esc>:w<CR>:!node %<CR>
     nmap <silent> <leader>mh <Esc>:w<CR>:!clear;ghc % -o a.out && ./a.out<CR>
 
-	" Save session
-	nmap <leader>s <Esc>:mksession!<CR>:wqa<CR>
-	nmap <leader>w <Esc>:w<CR>
-	nmap <leader>q <Esc>:q<CR>
-
     " Resize nicely
     nmap <leader>= <C-w>=
     nmap <leader>> <C-w>>
@@ -111,15 +106,13 @@
     " Copy and Paste from + register
     nmap <silent> <leader>p <Esc>:set paste<CR>"+p<CR>:set nopaste<CR>
     nmap <silent> <leader>P <Esc>:set paste<CR>"+P<CR>:set nopaste<CR>
-    vmap <silent> <leader>p <Esc>:set paste<CR>"+p<CR>:set nopaste<CR>
-    vmap <silent> <leader>P <Esc>:set paste<CR>"+P<CR>:set nopaste<CR>
     vmap <leader>y "+y<CR>
 
     " Toggle numbering
     nnoremap <leader>n <Esc>:call ToggleNumber()<CR>
  
     " Force redraw
-    nnoremap <silent> <leader><space><space> <Esc>:redraw!<CR>
+    nnoremap <silent> <leader><space><space> <Esc>:redraw!<CR>:syntax sync fromstart<CR>
 
     " Hex editor
     nnoremap <leader>h <Esc>Hexmode<CR>
@@ -143,7 +136,7 @@
     "nnoremap <leader>fs :sfind <C-R>=expand('%:p:h').'/**/*'<CR>
     "nnoremap <leader>fv :vert sfind <C-R>=expand('%:p:h').'/**/*'<CR>
     "nnoremap <leader>ft :tabfind <C-R>=expand('%:p:h').'/**/*'<CR>
-
+    
 " Folds
     set foldenable
     set foldlevelstart=10
@@ -151,18 +144,63 @@
     set foldmethod=indent
     nnoremap <leader>f za
 
-" Plugins
-    " runtime bundle/vim-surround/plugin/surround.vim
-    set runtimepath^=~/.vim/bundle/ctrlp.vim
-    set runtimepath^=~/.vim/bundle/tagbar
+" Plugins Install
+    " OLD METHOD
+    "runtime bundle/vim-surround/plugin/surround.vim
+    "set runtimepath^=~/.vim/bundle/ctrlp.vim
+    "set runtimepath^=~/.vim/bundle/tagbar
+    "set runtimepath^=~/.vim/bundle/LanguageClient-neovim
 
-    nnoremap <leader>c :CtrlPTag<cr>
-    nnoremap <leader>. :CtrlP<cr>
-    nnoremap <silent> <Leader>bb :TagbarToggle<CR>
-    nnoremap <silent> <Leader>bj :TagbarOpen j<CR>
-    let g:ctrlp_working_path_mode = 'a'
-    let g:tagbar_width = 60
+    call plug#begin('~/.vim/plugged')
 
+    Plug 'autozimu/LanguageClient-neovim', {
+                \ 'branch': 'next',
+                \ 'do': 'bash install.sh',
+                \ }
+
+    Plug 'junegunn/fzf'
+    Plug 'junegunn/fzf.vim'
+
+    Plug 'vimwiki/vimwiki'
+
+    call plug#end()
+
+    " Ctrl-P
+    " nnoremap <leader>c :CtrlPTag<cr>
+    "nnoremap <leader>. :CtrlP<cr>
+    "let g:ctrlp_working_path_mode = 'a'
+
+    " Fzf
+    nnoremap <leader>. :Files<cr>
+    nnoremap <leader>/ :Rg<cr>
+
+    " Tagbar
+    "nnoremap <silent> <Leader>bb :TagbarToggle<CR>
+    "nnoremap <silent> <Leader>bj :TagbarOpen j<CR>
+    "let g:tagbar_width = 60
+    
+
+    " LanguageClient
+    set hidden
+    let g:LanguageClient_serverCommands = {
+                \ 'rust': ['rust-analyzer'],
+                \ }
+
+    let g:LanguageClient_useVirtualText = "No"
+
+    let g:LanguageClient_loggingFile =  expand('~/.local/share/nvim/LanguageClient.log') 
+
+    " let g:LanguageClient_diagnosticsEnable=0
+    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <silent> <leader>lr :call LanguageClient#textDocument_rename()<CR>
+    nnoremap <silent> <leader>lc :call LanguageClient#textDocument_completion()<CR>
+
+    set signcolumn=no
+    nnoremap <silent> <leader>c <Esc>:call ToggleSignColumn()<CR>
+
+    " vimwiki
+    let g:vimwiki_list = [{'path': '~/Documents/.vimwiki/'}]
 
 " Functions
     " Switch between number and relative number
@@ -172,6 +210,16 @@
             set number
         else
             set relativenumber
+        endif
+    endfunc
+
+    " Switch between sign column and not
+    function! ToggleSignColumn()
+        if(&signcolumn == 'yes')
+            set signcolumn=no
+        else
+            set signcolumn=yes
+            sign unplace *
         endif
     endfunc
 
@@ -309,4 +357,6 @@
 
 
 " Fix for tmux
-set term=screen-256color
+if !has('nvim')
+    set term=screen-256color
+endif
